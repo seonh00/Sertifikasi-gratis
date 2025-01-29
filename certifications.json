@@ -1,0 +1,273 @@
+{
+  "certifications": [
+    {
+      "id": 1,
+      "vendor": "Google",
+      "title": "Digital Marketing Fundamentals",
+      "duration": "15 Jam",
+      "level": "Pemula",
+      "theme": "Digital Marketing",
+      "link": "https://learndigital.withgoogle.com/digitalgarage"
+    },
+    {
+      "id": 2,
+      "vendor": "Cisco",
+      "title": "Introduction to Cybersecurity",
+      "duration": "12 Jam",
+      "level": "Pemula",
+      "theme": "Cyber Security",
+      "link": "https://skillsforall.com/course/introduction-to-cybersecurity"
+    },
+    {
+      "id": 3,
+      "vendor": "Kaggle",
+      "title": "Python for Data Science",
+      "duration": "8 Jam",
+      "level": "Pemula",
+      "theme": "Data Science",
+      "link": "https://www.kaggle.com/learn/python"
+    },
+    {
+      "id": 4,
+      "vendor": "Future Learn",
+      "title": "AI for Healthcare",
+      "duration": "18 Jam",
+      "level": "Menengah",
+      "theme": "Artificial Intelligence",
+      "link": "https://www.futurelearn.com/courses/ai-for-healthcare"
+    },
+    {
+      "id": 5,
+      "vendor": "IBM",
+      "title": "Data Analysis with Python",
+      "duration": "10 Jam",
+      "level": "Menengah",
+      "theme": "Data Science",
+      "link": "https://cognitiveclass.ai/courses/data-analysis-with-python"
+    },
+    {
+      "id": 6,
+      "vendor": "Code Signal",
+      "title": "JavaScript Fundamentals",
+      "duration": "6 Jam",
+      "level": "Pemula",
+      "theme": "Programming",
+      "link": "https://codesignal.com/learn"
+    },
+    {
+      "id": 7,
+      "vendor": "Harvard",
+      "title": "CS50's Introduction to Computer Science",
+      "duration": "50 Jam",
+      "level": "Menengah",
+      "theme": "Computer Science",
+      "link": "https://cs50.harvard.edu/x/2023/"
+    },
+    {
+      "id": 8,
+      "vendor": "Google",
+      "title": "Cloud Computing Basics",
+      "duration": "20 Jam",
+      "level": "Pemula",
+      "theme": "Cloud Computing",
+      "link": "https://cloud.google.com/training"
+    },
+    {
+      "id": 9,
+      "vendor": "Cisco",
+      "title": "Networking Basics",
+      "duration": "15 Jam",
+      "level": "Pemula",
+      "theme": "Networking",
+      "link": "https://skillsforall.com/course/networking-basics"
+    },
+    {
+      "id": 10,
+      "vendor": "Kaggle",
+      "title": "Machine Learning Explainability",
+      "duration": "7 Jam",
+      "level": "Menengah",
+      "theme": "Machine Learning",
+      "link": "https://www.kaggle.com/learn/machine-learning-explainability"
+    },
+    {
+      "id": 11,
+      "vendor": "Future Learn",
+      "title": "Ethical Hacking Fundamentals",
+      "duration": "14 Jam",
+      "level": "Menengah",
+      "theme": "Cyber Security",
+      "link": "https://www.futurelearn.com/courses/ethical-hacking"
+    },
+    {
+      "id": 12,
+      "vendor": "IBM",
+      "title": "Blockchain Essentials",
+      "duration": "9 Jam",
+      "level": "Pemula",
+      "theme": "Blockchain",
+      "link": "https://cognitiveclass.ai/courses/blockchain-course"
+    },
+    {
+      "id": 13,
+      "vendor": "Code Signal",
+      "title": "SQL Fundamentals",
+      "duration": "5 Jam",
+      "level": "Pemula",
+      "theme": "Database",
+      "link": "https://codesignal.com/learn-sql"
+    },
+    {
+      "id": 14,
+      "vendor": "Harvard",
+      "title": "Data Science Professional Certificate",
+      "duration": "60 Jam",
+      "level": "Menengah",
+      "theme": "Data Science",
+      "link": "https://www.edx.org/professional-certificate/harvardx-data-science"
+    },
+    {
+      "id": 15,
+      "vendor": "Google",
+      "title": "IT Automation with Python",
+      "duration": "25 Jam",
+      "level": "Menengah",
+      "theme": "Programming",
+      "link": "https://www.coursera.org/professional-certificates/google-it-automation"
+    },
+    {
+      "id": 16,
+      "vendor": "Cisco",
+      "title": "IoT Fundamentals",
+      "duration": "18 Jam",
+      "level": "Menengah",
+      "theme": "IoT",
+      "link": "https://skillsforall.com/course/iot-fundamentals"
+    },
+    {
+      "id": 17,
+      "vendor": "Kaggle",
+      "title": "Data Visualization",
+      "duration": "6 Jam",
+      "level": "Pemula",
+      "theme": "Data Science",
+      "link": "https://www.kaggle.com/learn/data-visualization"
+    },
+    {
+      "id": 18,
+      "vendor": "Future Learn",
+      "title": "Digital Forensics",
+      "duration": "16 Jam",
+      "level": "Menengah",
+      "theme": "Cyber Security",
+      "link": "https://www.futurelearn.com/courses/digital-forensics"
+    },
+    {
+      "id": 19,
+      "vendor": "IBM",
+      "title": "Quantum Computing Basics",
+      "duration": "12 Jam",
+      "level": "Menengah",
+      "theme": "Quantum Computing",
+      "link": "https://cognitiveclass.ai/courses/quantum-computing"
+    },
+    {
+      "id": 20,
+      "vendor": "Code Signal",
+      "title": "Algorithms Fundamentals",
+      "duration": "8 Jam",
+      "level": "Menengah",
+      "theme": "Programming",
+      "link": "https://codesignal.com/learn"
+    },
+    {
+      "id": 21,
+      "vendor": "Harvard",
+      "title": "Web Programming with Python and JavaScript",
+      "duration": "40 Jam",
+      "level": "Menengah",
+      "theme": "Web Development",
+      "link": "https://cs50.harvard.edu/web/2020/"
+    },
+    {
+      "id": 22,
+      "vendor": "Google",
+      "title": "Android Basics",
+      "duration": "20 Jam",
+      "level": "Pemula",
+      "theme": "Mobile Development",
+      "link": "https://developer.android.com/courses"
+    },
+    {
+      "id": 23,
+      "vendor": "Cisco",
+      "title": "Packet Tracer 101",
+      "duration": "10 Jam",
+      "level": "Pemula",
+      "theme": "Networking",
+      "link": "https://www.netacad.com/courses/packet-tracer"
+    },
+    {
+      "id": 24,
+      "vendor": "Kaggle",
+      "title": "Advanced SQL",
+      "duration": "7 Jam",
+      "level": "Menengah",
+      "theme": "Database",
+      "link": "https://www.kaggle.com/learn/advanced-sql"
+    },
+    {
+      "id": 25,
+      "vendor": "Future Learn",
+      "title": "Big Data Analytics",
+      "duration": "15 Jam",
+      "level": "Menengah",
+      "theme": "Data Science",
+      "link": "https://www.futurelearn.com/courses/big-data-analytics"
+    },
+    {
+      "id": 26,
+      "vendor": "IBM",
+      "title": "Watson AI Fundamentals",
+      "duration": "8 Jam",
+      "level": "Pemula",
+      "theme": "Artificial Intelligence",
+      "link": "https://cognitiveclass.ai/courses/watson-ai-fundamentals"
+    },
+    {
+      "id": 27,
+      "vendor": "Code Signal",
+      "title": "React Fundamentals",
+      "duration": "6 Jam",
+      "level": "Pemula",
+      "theme": "Web Development",
+      "link": "https://codesignal.com/learn"
+    },
+    {
+      "id": 28,
+      "vendor": "Harvard",
+      "title": "Game Development Fundamentals",
+      "duration": "30 Jam",
+      "level": "Menengah",
+      "theme": "Game Development",
+      "link": "https://cs50.harvard.edu/games/2018/"
+    },
+    {
+      "id": 29,
+      "vendor": "Google",
+      "title": "Flutter Basics",
+      "duration": "18 Jam",
+      "level": "Pemula",
+      "theme": "Mobile Development",
+      "link": "https://flutter.dev/learn"
+    },
+    {
+      "id": 30,
+      "vendor": "Cisco",
+      "title": "Cyber Threat Management",
+      "duration": "14 Jam",
+      "level": "Menengah",
+      "theme": "Cyber Security",
+      "link": "https://skillsforall.com/course/cyber-threat-management"
+    }
+  ]
