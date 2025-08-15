@@ -1,551 +1,340 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sertifikasi Gratis</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-/* ---------- Theme vars ---------- */
-:root{
-  --bg-1: #f5f5f5;
-  --bg-2: #ececec;
-  --text-color: #111;
-  --icon-color: #111;
-  --card-bg: rgba(255,255,255,0.68);
-  --control-bg: rgba(255,255,255,0.6);
-  --muted: #6b6b6b;
-  --border: rgba(0,0,0,0.06);
-  --glass-border: rgba(255,255,255,0.4);
-  --shadow: 0 6px 18px rgba(16,24,40,0.06);
+:root {
+    --bg-light: #f5f5f5;
+    --bg-dark: #1f1f1f;
+    --card-light: rgba(255, 255, 255, 0.7);
+    --card-dark: rgba(40, 40, 40, 0.6);
+    --text-light: #000;
+    --text-dark: #fff;
+    --btn-light: #1f1f1f;
+    --btn-dark: #f5f5f5;
+    --btn-text-light: #fff;
+    --btn-text-dark: #000;
 }
 
-.dark-theme{
-  --bg-1: #141414;
-  --bg-2: #1d1d1d;
-  --text-color: #f4f4f4;
-  --icon-color: #f4f4f4;
-  --card-bg: rgba(40,40,40,0.52);
-  --control-bg: rgba(30,30,30,0.45);
-  --muted: #c4c4c4;
-  --border: rgba(255,255,255,0.03);
-  --glass-border: rgba(255,255,255,0.06);
-  --shadow: 0 6px 18px rgba(0,0,0,0.45);
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: var(--bg-light);
+    color: var(--text-light);
+    transition: background 0.3s, color 0.3s;
 }
 
-/* ---------- Base layout ---------- */
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  font-family: 'Poppins',sans-serif;
-  margin:0;
-  padding:22px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:14px;
-  background: linear-gradient(135deg,var(--bg-1),var(--bg-2));
-  color:var(--text-color);
-  transition: background 0.25s ease, color 0.25s ease;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
+.dark-mode {
+    background: var(--bg-dark);
+    color: var(--text-dark);
 }
 
-/* ---------- Header / search ---------- */
-.container{
-  width:100%;
-  max-width:1200px;
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
 }
 
-.main-header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  margin-bottom:6px;
+/* Header with search */
+.header-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+.header-title {
+    font-size: 1.6em;
+    font-weight: bold;
+}
+.typing {
+    border-right: 2px solid;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing 3s steps(20) infinite alternate, blink 0.7s step-end infinite;
+}
+@keyframes typing { from { width: 0; } to { width: 100%; } }
+@keyframes blink { 50% { border-color: transparent; } }
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background: rgba(255,255,255,0.4);
+    backdrop-filter: blur(10px);
+    border-radius: 25px;
+    padding: 5px 10px;
+    flex: 1;
+    max-width: 300px;
+}
+.search-box input {
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 8px;
+    flex: 1;
+    font-size: 0.9em;
+    color: inherit;
+}
+.search-box i { color: inherit; }
+
+.filter-icon {
+    background: rgba(255,255,255,0.4);
+    backdrop-filter: blur(10px);
+    border: none;
+    border-radius: 50%;
+    padding: 8px 10px;
+    cursor: pointer;
+    color: inherit;
 }
 
-h1{
-  margin:0;
-  font-size:26px;
-  font-weight:600;
-  letter-spacing:-0.2px;
+/* Vendor filter */
+.vendor-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+.vendor-filters button {
+    background: rgba(255,255,255,0.4);
+    backdrop-filter: blur(8px);
+    border: none;
+    padding: 6px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    color: inherit;
+}
+.vendor-filters button.active {
+    background: #ffcc00;
+    color: #000;
 }
 
-/* typing caret */
-.type-animation{
-  display:inline-block;
-  white-space:nowrap;
-  overflow:hidden;
-  vertical-align:middle;
-  border-right:2px solid var(--text-color);
-  padding-right:4px;
-  animation: caret 1s steps(1) infinite;
+/* Cards */
+#certList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 15px;
+    opacity: 1;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
-@keyframes caret{50%{border-color:transparent}}
+.fade-transition { opacity: 0; transform: translateY(10px); }
+.fade-transition.show { opacity: 1; transform: translateY(0); }
 
-/* controls */
-.header-controls{
-  display:flex;
-  gap:12px;
-  align-items:center;
+.cert-item {
+    background: var(--card-light);
+    backdrop-filter: blur(10px);
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    animation: fadeUp 0.4s ease forwards;
 }
+.dark-mode .cert-item { background: var(--card-dark); }
 
-.search-container{
-  position:relative;
-  background:var(--control-bg);
-  padding:8px 12px;
-  border-radius:10px;
-  border:1px solid var(--glass-border);
-  backdrop-filter: blur(8px);
-  box-shadow: var(--shadow);
-  display:flex;
-  align-items:center;
-}
-#searchInput{
-  border:0;
-  background:transparent;
-  color:var(--text-color);
-  font-size:14px;
-  width:240px;
-  padding:6px 8px;
-}
-#searchInput:focus{outline:none}
-.search-container i{color:var(--icon-color); font-size:14px}
-
-/* filter button */
-#filterMenuButton{
-  background:var(--control-bg);
-  color:var(--text-color);
-  padding:9px 12px;
-  border-radius:10px;
-  border:1px solid var(--glass-border);
-  cursor:pointer;
-  box-shadow: var(--shadow);
-}
-#filterMenuButton i{font-size:14px}
-
-/* ---------- Filter dropdown & chips ---------- */
-.filter-dropdown{
-  position:absolute;
-  right:0;
-  margin-top:10px;
-  background:var(--control-bg);
-  border-radius:10px;
-  padding:12px;
-  width:240px;
-  border:1px solid var(--glass-border);
-  backdrop-filter: blur(8px);
-  box-shadow: var(--shadow);
-  display:none;
-  z-index:40;
-}
-.filter-dropdown label{display:block; font-size:13px; color:var(--text-color); margin-bottom:6px}
-#filterChips{
-  margin-top:6px;
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-}
-
-/* vendor chips */
-.vendor-chip{
-  padding:6px 12px;
-  border-radius:999px;
-  background:var(--control-bg);
-  border:1px solid var(--glass-border);
-  color:var(--text-color);
-  font-size:13px;
-  cursor:pointer;
-  transition:transform .12s;
-}
-.vendor-chip.active{
-  background:transparent;
-  color:var(--text-color);
-  box-shadow: inset 0 0 0 2px var(--glass-border);
-  transform:scale(0.98);
-}
-
-/* ---------- Card grid ---------- */
-#certList{
-  width:100%;
-  display:grid;
-  grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
-  gap:18px;
-  max-width:1200px;
-  transition:opacity .28s ease, transform .28s ease;
-  will-change:opacity,transform;
-}
-
-/* fade-transition wrapper classes for page change */
-.fade-transition { opacity:0; transform: translateY(8px); }
-.fade-transition.show { opacity:1; transform: translateY(0); }
-
-/* card glass style */
-.cert-item{
-  border-radius:12px;
-  padding:18px;
-  background:var(--card-bg);
-  border:1px solid var(--glass-border);
-  backdrop-filter: blur(12px);
-  box-shadow: var(--shadow);
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-  transform: translateY(10px);
-  opacity:0;
-  animation: fadeUp .45s ease forwards;
-}
 @keyframes fadeUp {
-  to { transform:none; opacity:1; }
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* tiny delay handled inline via style attribute */
-.cert-item h3{ margin:0; font-size:18px; color:var(--text-color); font-weight:600; }
-.vendor-theme{ font-size:13px; color:var(--muted); margin-top:2px; }
-.cert-info{ display:flex; justify-content:space-between; align-items:center; gap:12px; color:var(--icon-color); font-size:13px; margin-top:6px }
-.cert-info i{ margin-right:8px; color:var(--icon-color) }
+.cert-item h3 { margin: 0 0 5px; }
+.vendor-theme { font-size: 0.85em; opacity: 0.8; margin-bottom: 8px; }
+.cert-info { font-size: 0.85em; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
 
-/* access button */
-.cert-link{
-  margin-top:6px;
-  padding:10px 12px;
-  border-radius:10px;
-  border:1px solid var(--glass-border);
-  background:transparent;
-  color:var(--text-color);
-  text-align:center;
-  cursor:pointer;
-  font-weight:600;
+/* Star colors */
+.star-pemula { color: gray; }
+.star-menengah {
+    background: linear-gradient(to right, gold 50%, gray 50%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
-.cert-link:hover{ background:rgba(0,0,0,0.04) }
+.star-expert { color: gold; }
 
-/* empty state */
-.empty-state{
-  padding:30px;
-  border-radius:10px;
-  text-align:center;
-  color:var(--muted);
-  border:1px dashed var(--glass-border);
+/* Akses Button */
+.cert-link {
+    display: inline-block;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
 }
+.light-mode .cert-link { background: var(--btn-light); color: var(--btn-text-light); }
+.dark-mode .cert-link { background: var(--btn-dark); color: var(--btn-text-dark); }
 
-/* ---------- Pagination ---------- */
-.pagination{
-  display:flex;
-  gap:10px;
-  align-items:center;
-  justify-content:center;
-  width:100%;
-  margin-top:6px;
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
 }
-.pagination button{
-  padding:8px 12px;
-  border-radius:8px;
-  border:1px solid var(--glass-border);
-  background:var(--control-bg);
-  color:var(--text-color);
-  cursor:pointer;
+.pagination button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background: rgba(255,255,255,0.4);
+    backdrop-filter: blur(5px);
+    color: inherit;
 }
-.pagination button:disabled{ opacity:0.45; cursor:not-allowed; }
+.pagination span { font-size: 0.9em; }
 
-/* ---------- Footer & theme toggle ---------- */
-footer{ margin-top:28px; color:var(--muted); font-size:13px; text-align:center; width:100%; max-width:1200px; }
-#themeToggle{
-  position:fixed;
-  bottom:18px;
-  right:18px;
-  width:46px; height:46px;
-  border-radius:50%;
-  border:1px solid var(--glass-border);
-  background:var(--control-bg);
-  color:var(--text-color);
-  display:flex; align-items:center; justify-content:center;
-  cursor:pointer;
-  backdrop-filter: blur(8px);
-  box-shadow: var(--shadow);
+.footer {
+    text-align: center;
+    font-size: 0.8em;
+    margin-top: 15px;
+    opacity: 0.7;
 }
 
-/* responsive tweaks */
-@media (max-width:720px){
-  #searchInput{ width:140px }
-  .main-header{ flex-direction:column; align-items:flex-start; gap:12px }
-  .header-controls{ width:100%; justify-content:space-between }
+/* Toggle Mode Button */
+.toggle-mode {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(255,255,255,0.4);
+    backdrop-filter: blur(10px);
+    border: none;
+    padding: 10px 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2em;
+    color: inherit;
 }
 </style>
 </head>
 <body>
-  <div class="container">
-    <div class="main-header">
-      <h1><span id="animatedTitle" class="type-animation"></span></h1>
+<div class="container">
 
-      <div class="header-controls">
-        <div style="position:relative;">
-          <div class="search-container" role="search">
-            <input id="searchInput" type="search" placeholder="Cari sertifikasi..." aria-label="Cari sertifikasi">
-            <i class="fas fa-search" aria-hidden="true"></i>
-          </div>
-          <div id="filterDropdown" class="filter-dropdown" aria-hidden="true" aria-label="Filter tema">
-            <strong style="display:block;margin-bottom:8px">Filter Tema</strong>
-            <label><input type="checkbox" class="theme-filter" value="Networking"> Networking</label>
-            <label><input type="checkbox" class="theme-filter" value="Cyber Security"> Cyber Security</label>
-            <label><input type="checkbox" class="theme-filter" value="Data Science"> Data Science</label>
-            <label><input type="checkbox" class="theme-filter" value="Artificial Intelligence"> Artificial Intelligence</label>
-            <label><input type="checkbox" class="theme-filter" value="Machine Learning"> Machine Learning</label>
-            <label><input type="checkbox" class="theme-filter" value="Programming"> Programming</label>
-            <label><input type="checkbox" class="theme-filter" value="Database"> Database</label>
-          </div>
+    <!-- Header -->
+    <div class="header-top">
+        <div class="header-title typing">Sertifikasi Gratis</div>
+        <div class="search-box">
+            <input type="text" id="search" placeholder="Cari sertifikasi...">
+            <i class="fas fa-search"></i>
         </div>
-
-        <div style="display:flex; gap:10px; align-items:center;">
-          <div id="filterChips" aria-live="polite" ></div>
-          <button id="filterMenuButton" aria-haspopup="true" aria-expanded="false" title="Filter tema">
-            <i class="fas fa-filter" aria-hidden="true"></i>
-          </button>
-        </div>
-      </div>
+        <button class="filter-icon"><i class="fas fa-filter"></i></button>
     </div>
 
+    <!-- Vendor filters -->
+    <div class="vendor-filters" id="vendorFilters"></div>
+
+    <!-- List -->
     <div id="certList" class="fade-transition show"></div>
 
-    <div class="pagination" aria-label="Pagination controls">
-      <button id="prevPage">Prev</button>
-      <div id="pageInfo" style="font-weight:600;color:var(--muted)"></div>
-      <button id="nextPage">Next</button>
+    <!-- Pagination -->
+    <div class="pagination">
+        <button id="prevPage">Prev</button>
+        <span id="pageInfo">1 / 1</span>
+        <button id="nextPage">Next</button>
     </div>
 
-    <footer>Made with care by seonh_0</footer>
-  </div>
+    <div class="footer">Made with care by seonh_0</div>
+</div>
 
-  <button id="themeToggle" title="Toggle theme" aria-pressed="false"><i class="fas fa-moon"></i></button>
+<!-- Toggle Mode -->
+<button class="toggle-mode" id="toggleMode"><i class="fas fa-moon"></i></button>
 
 <script>
-/* ----------------- Theme toggle ----------------- */
-const themeToggle = document.getElementById('themeToggle');
-const themeIcon = themeToggle.querySelector('i');
-
-function applySavedTheme(){
-  const saved = localStorage.getItem('theme') || 'light';
-  if(saved === 'dark') document.body.classList.add('dark-theme');
-  themeIcon.className = document.body.classList.contains('dark-theme') ? 'fas fa-sun' : 'fas fa-moon';
-  themeToggle.setAttribute('aria-pressed', document.body.classList.contains('dark-theme'));
-}
-themeToggle.addEventListener('click', () => {
-  document.body.classList.toggle('dark-theme');
-  const dark = document.body.classList.contains('dark-theme');
-  localStorage.setItem('theme', dark ? 'dark' : 'light');
-  themeIcon.className = dark ? 'fas fa-sun' : 'fas fa-moon';
-  themeToggle.setAttribute('aria-pressed', dark);
-});
-
-/* ----------------- Typing animation ----------------- */
-const titles = ["Sertifikasi Gratis", "Belajar Tanpa Batas"];
-let tIndex = 0, charIdx = 0, deleting = false;
-const typeSpeed = 90, deleteSpeed = 45, pauseBetween = 1500;
-function typeLoop(){
-  const el = document.getElementById('animatedTitle');
-  const text = titles[tIndex];
-  if(!deleting){
-    el.textContent = text.slice(0, ++charIdx);
-    if(charIdx === text.length){
-      deleting = true;
-      setTimeout(typeLoop, pauseBetween); return;
-    }
-  } else {
-    el.textContent = text.slice(0, --charIdx);
-    if(charIdx === 0){
-      deleting = false; tIndex = (tIndex+1) % titles.length;
-    }
-  }
-  setTimeout(typeLoop, deleting ? deleteSpeed : typeSpeed);
-}
-
-/* ----------------- State & pagination ----------------- */
 let certifications = [];
-let state = { vendors: [], themes: [], searchQuery: '' };
-let currentPage = 1, itemsPerPage = 9;
-const certListEl = document.getElementById('certList');
-const prevBtn = document.getElementById('prevPage');
-const nextBtn = document.getElementById('nextPage');
-const pageInfoEl = document.getElementById('pageInfo');
+const itemsPerPage = 8;
+let currentPage = 1;
+let state = { vendors: [], searchQuery: "" };
 
-function setFilterDropdown(open){
-  const dropdown = document.getElementById('filterDropdown');
-  dropdown.style.display = open ? 'block' : 'none';
-  document.getElementById('filterMenuButton').setAttribute('aria-expanded', open);
+// Load mode from localStorage
+if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark-mode");
+} else {
+    document.body.classList.add("light-mode");
 }
 
-/* close dropdown when clicking outside */
-document.addEventListener('click', (e) => {
-  const dd = document.getElementById('filterDropdown');
-  const btn = document.getElementById('filterMenuButton');
-  if(!dd.contains(e.target) && !btn.contains(e.target)){
-    setFilterDropdown(false);
-  }
-});
-document.getElementById('filterMenuButton').addEventListener('click', () => {
-  const dd = document.getElementById('filterDropdown');
-  setFilterDropdown(dd.style.display !== 'block');
+// Toggle mode
+document.getElementById("toggleMode").addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+    document.body.classList.toggle("light-mode");
+    localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
 });
 
-/* search */
-const searchInput = document.getElementById('searchInput');
-let searchTimer;
-searchInput.addEventListener('input', (e) => {
-  clearTimeout(searchTimer);
-  searchTimer = setTimeout(() => {
-    state.searchQuery = e.target.value.trim().toLowerCase();
-    currentPage = 1;
-    renderWithTransition();
-  }, 240);
-});
-
-/* theme filter checkboxes */
-document.querySelectorAll('.theme-filter').forEach(cb => {
-  cb.addEventListener('change', () => {
-    state.themes = Array.from(document.querySelectorAll('.theme-filter:checked')).map(c => c.value);
-    currentPage = 1; renderWithTransition();
-  });
-});
-
-/* toggle vendor filter chips */
-window.toggleVendorFilter = function(value){
-  state.vendors = state.vendors.includes(value) ? state.vendors.filter(v=>v!==value) : [...state.vendors, value];
-  currentPage = 1;
-  renderFilterChips();
-  renderWithTransition();
-}
-
-/* render vendor chips from data */
-function renderFilterChips(){
-  const el = document.getElementById('filterChips');
-  const vendors = [...new Set(certifications.map(c=>c.vendor))];
-  el.innerHTML = vendors.map(v => {
-    const active = state.vendors.includes(v) ? 'active' : '';
-    return `<button class="vendor-chip ${active}" onclick="toggleVendorFilter('${escapeHtmlAttr(v)}')">${escapeHtml(v)}</button>`;
-  }).join('');
-}
-
-/* escape helper for safety when outputting vendor strings (simple) */
-function escapeHtml(str){
-  return String(str).replace(/[&<>"']/g, s=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[s]));
-}
-function escapeHtmlAttr(s){ return String(s).replace(/'/g,"\\'").replace(/"/g,'\\"'); }
-
-/* ----------------- Render with smooth page transition ----------------- */
-function renderWithTransition(){
-  // fade-out
-  certListEl.classList.remove('show');
-  certListEl.classList.add('fade-transition');
-  certListEl.style.pointerEvents = 'none';
-  setTimeout(() => {
-    renderCertList(); // replace content while hidden
-    // small delay then fade-in
-    setTimeout(()=> {
-      certListEl.classList.add('show');
-      certListEl.style.pointerEvents = '';
-    }, 20);
-  }, 260); // match CSS transition time (approx)
-}
-
-/* main rendering logic */
-function renderCertList(){
-  // filter
-  const filtered = certifications.filter(cert => {
-    const vendorMatch = state.vendors.length === 0 || state.vendors.includes(cert.vendor);
-    const themeMatch = state.themes.length === 0 || state.themes.includes(cert.theme);
-    const q = state.searchQuery || '';
-    const searchMatch = cert.title.toLowerCase().includes(q) || cert.vendor.toLowerCase().includes(q) || cert.theme.toLowerCase().includes(q);
-    return vendorMatch && themeMatch && searchMatch;
-  });
-
-  const totalPages = Math.max(1, Math.ceil(filtered.length / itemsPerPage));
-  if(currentPage > totalPages) currentPage = totalPages;
-
-  const start = (currentPage-1) * itemsPerPage;
-  const paginated = filtered.slice(start, start + itemsPerPage);
-
-  // content
-  if(paginated.length === 0){
-    certListEl.innerHTML = `<div class="empty-state">Tidak ada sertifikasi ditemukan</div>`;
-  } else {
-    certListEl.innerHTML = paginated.map((cert, idx) => {
-      // small per-card animation delay
-      const delay = (idx * 50); // ms
-      const title = escapeHtml(cert.title);
-      const vendor = escapeHtml(cert.vendor);
-      const theme = escapeHtml(cert.theme);
-      const duration = escapeHtml(cert.duration);
-      const level = escapeHtml(cert.level);
-      const link = cert.link ? cert.link.replace(/'/g,"\\'") : '#';
-      return `<article class="cert-item" role="article" style="animation-delay:${delay}ms">
-        <h3>${title}</h3>
-        <div class="vendor-theme">${vendor} · ${theme}</div>
-        <div class="cert-info">
-          <div><i class="fas fa-clock" aria-hidden="true"></i>${duration}</div>
-          <div><i class="fas fa-star" aria-hidden="true"></i>${level}</div>
-        </div>
-        <div style="display:flex; justify-content:flex-end; margin-top:6px;">
-          <button class="cert-link" onclick="window.open('${link}','_blank')">Akses</button>
-        </div>
-      </article>`;
-    }).join('');
-  }
-
-  // update pagination UI
-  pageInfoEl.textContent = `${currentPage} / ${totalPages}`;
-  prevBtn.disabled = currentPage === 1;
-  nextBtn.disabled = currentPage === totalPages;
-
-  // update filter chips (vendors)
-  renderFilterChips();
-}
-
-/* pagination handlers */
-prevBtn.addEventListener('click', () => {
-  if(currentPage > 1){ currentPage--; renderWithTransition(); }
-});
-nextBtn.addEventListener('click', () => {
-  currentPage++; renderWithTransition();
-});
-
-/* ----------------- Fetch JSON data ----------------- */
-fetch('certifications.json')
-  .then(r => {
-    if(!r.ok) throw new Error('HTTP ' + r.status);
-    return r.json();
-  })
-  .then(data => {
-    certifications = Array.isArray(data.certifications) ? data.certifications : (data || []);
-    // init: ensure lowercase properties etc.
-    certifications = certifications.map(c => ({
-      id: c.id,
-      vendor: c.vendor || 'Unknown',
-      title: c.title || 'Untitled',
-      duration: c.duration || '',
-      level: c.level || '',
-      theme: c.theme || '',
-      link: c.link || ''
-    }));
-    // render initial
+// Fetch certifications
+fetch("certifications.json")
+.then(res => res.json())
+.then(data => {
+    certifications = data;
+    renderVendorFilters();
     renderCertList();
-  })
-  .catch(err => {
-    console.error('Gagal memuat certifications.json:', err);
-    certListEl.innerHTML = `<div class="empty-state">Gagal memuat data. Pastikan <code>certifications.json</code> ada di folder yang sama.</div>`;
-  });
-
-/* ----------------- Initial setup on DOMContentLoaded ----------------- */
-document.addEventListener('DOMContentLoaded', () => {
-  applySavedTheme();
-  typeLoop();
-  // make initial certList visible
-  setTimeout(()=> {
-    certListEl.classList.add('show');
-  }, 40);
 });
+
+function renderVendorFilters() {
+    const vendors = [...new Set(certifications.map(c => c.vendor))];
+    document.getElementById("vendorFilters").innerHTML = vendors.map(v =>
+        `<button onclick="toggleVendor('${v}')">${v}</button>`
+    ).join("");
+}
+
+function toggleVendor(vendor) {
+    if (state.vendors.includes(vendor)) {
+        state.vendors = state.vendors.filter(v => v !== vendor);
+    } else {
+        state.vendors.push(vendor);
+    }
+    renderCertList();
+}
+
+document.getElementById("search").addEventListener("input", e => {
+    state.searchQuery = e.target.value.toLowerCase();
+    renderCertList();
+});
+
+function renderCertList() {
+    const certListEl = document.getElementById('certList');
+    certListEl.classList.remove('show');
+    setTimeout(() => {
+        const filtered = certifications.filter(cert => {
+            const vendorMatch = state.vendors.length === 0 || state.vendors.includes(cert.vendor);
+            const searchMatch = cert.title.toLowerCase().includes(state.searchQuery) ||
+                                cert.vendor.toLowerCase().includes(state.searchQuery) ||
+                                cert.theme.toLowerCase().includes(state.searchQuery);
+            return vendorMatch && searchMatch;
+        });
+        const totalPages = Math.ceil(filtered.length / itemsPerPage);
+        if (currentPage > totalPages) currentPage = totalPages || 1;
+        const start = (currentPage - 1) * itemsPerPage;
+        const paginated = filtered.slice(start, start + itemsPerPage);
+
+        certListEl.innerHTML = paginated.length === 0
+            ? `<div>Tidak ada sertifikasi ditemukan</div>`
+            : paginated.map(cert => `
+                <div class="cert-item">
+                    <h3>${cert.title}</h3>
+                    <div class="vendor-theme">${cert.vendor} - ${cert.theme}</div>
+                    <div class="cert-info">
+                        <span><i class="fas fa-clock"></i> ${cert.duration}</span>
+                        <span>${renderStar(cert.level)} ${cert.level}</span>
+                    </div>
+                    <button class="cert-link" onclick="window.open('${cert.link}','_blank')">Akses</button>
+                </div>
+            `).join("");
+
+        document.getElementById('pageInfo').textContent = `${currentPage} / ${totalPages || 1}`;
+        document.getElementById('prevPage').disabled = currentPage === 1;
+        document.getElementById('nextPage').disabled = currentPage === totalPages || totalPages === 0;
+
+        setTimeout(() => certListEl.classList.add('show'), 20);
+    }, 300);
+}
+
+function renderStar(level) {
+    if (level.toLowerCase() === "pemula") return `<i class="fas fa-star star-pemula"></i>`;
+    if (level.toLowerCase() === "menengah") return `<i class="fas fa-star star-menengah"></i>`;
+    if (level.toLowerCase() === "expert") return `<i class="fas fa-star star-expert"></i>`;
+    return `<i class="fas fa-star"></i>`;
+}
+
+document.getElementById("prevPage").onclick = () => { if (currentPage > 1) { currentPage--; renderCertList(); } };
+document.getElementById("nextPage").onclick = () => { currentPage++; renderCertList(); };
 </script>
 </body>
 </html>
