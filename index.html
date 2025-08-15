@@ -1,554 +1,227 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sertifikasi Gratis</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sertifikasi Gratis</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
+<style>
+:root {
+    --bg-gradient-1: #f9f9f9;
+    --bg-gradient-2: #eaeaea;
+    --text-color: #222;
+    --card-bg: rgba(255, 255, 255, 0.85);
+    --filter-bg: rgba(255, 255, 255, 0.9);
+    --button-color: #ff7b54;
+    --button-active-color: #ff5a2e;
+    --footer-color: #555;
+}
 
-        /* STYLE ASLI TANPA DIUBAH */
-        :root {
-            --bg-gradient-1: #fff3e0;
-            --bg-gradient-2: #ffb6c1;
-            --text-color: #00000f;
-            --card-bg: rgba(255, 255, 255, 0.7);
-            --filter-bg: rgba(255, 255, 255, 0.7);
-            --button-color: #ff6b4d;
-            --button-active-color: #ff4d32;
-            --footer-color: #666;
-        }
+.dark-theme {
+    --bg-gradient-1: #1e1e1e;
+    --bg-gradient-2: #2b2b2b;
+    --text-color: #f2f2f2;
+    --card-bg: rgba(40, 40, 40, 0.85);
+    --filter-bg: rgba(50, 50, 50, 0.9);
+    --button-color: #ff7b54;
+    --button-active-color: #ff5a2e;
+    --footer-color: #bbb;
+}
 
-        .dark-theme {
-            --bg-gradient-1: #2d1a0f;
-            --bg-gradient-2: #1a0f1a;
-            --text-color: #ffffff;
-            --card-bg: rgba(45, 26, 15, 0.8);
-            --filter-bg: rgba(45, 26, 15, 0.9);
-            --button-color: #ff6b4d;
-            --button-active-color: #ff4d32;
-            --footer-color: #b2bec3;
-        }
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 20px;
+    padding-bottom: 0;
+    background: linear-gradient(to bottom right, var(--bg-gradient-1), var(--bg-gradient-2));
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: background 0.3s ease;
+}
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 20px;
-            padding-bottom: 0;
-            background: linear-gradient(to bottom right, var(--bg-gradient-1), var(--bg-gradient-2));
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            transition: background 0.3s ease;
-        }
+h1 {
+    color: var(--text-color);
+    margin-bottom: 20px;
+    font-weight: 600;
+}
 
-        h1 {
-            color: var(--text-color);
-            margin-bottom: 20px;
-            margin-left: 5px;
-            font-weight: 600;
-            letter-spacing: -0.5px;
-        }
-        
-        /* ANIMASI TYPING DIPERBAIKI */
-        .type-animation {
-            display: inline-block;
-            position: relative;
-            overflow: visible; /* Diubah dari hidden ke visible */
-            white-space: nowrap;
-            vertical-align: top; /* Pastikan alignment konsisten */
-        }
-        
-        @keyframes typing {
-            from { 
-                max-width: 0; /* Gunakan max-width bukan width */
-            }
-            to { 
-                max-width: 100%; /* Maksimum lebar sesuai container */
-            }
-        }
-        
-        .type-animation::after {
-            content: ""; /* Pastikan tidak ada elemen tambahan */
-            animation: none;
-            border: none;
-        }
-        
-        .main-header {
-            width: 100%;
-            max-width: 1200px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding: 0 20px;
-            box-sizing: border-box;
-            position: center;
-        }
+.main-header {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
 
-        .header-controls {
-            position: relative;
-            display: flex;
-            top: 0px;
-            right: 0px;
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            z-index: 100;
-        }
+.search-container {
+    position: relative;
+    background: var(--filter-bg);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    padding-right: 30px;
+}
 
-        .search-container {
-            position: relative;
-            background: var(--filter-bg);
-            backdrop-filter: blur(10px);
-            border-radius: 8px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            margin-left: 10px;
-            width: 250px;
-        }
+#searchInput {
+    padding: 10px;
+    border: none;
+    background: transparent;
+    color: var(--text-color);
+    width: 250px;
+}
 
-        #searchInput {
-            padding: 10px 35px 10px 15px;
-            border: none;
-            background: transparent;
-            color: var(--text-color);
-            font-family: 'Poppins', sans-serif;
-            width: 300px;
-            transition: all 0.3s ease;
-        }
+#searchInput:focus {
+    outline: none;
+}
 
-        #searchInput::placeholder {
-            color: var(--text-color);
-            opacity: 0.7;
-        }
+.search-container i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-color);
+}
 
-        #searchInput:focus {
-            outline: none;
-            width: 250px;
-        }
+#filterMenuButton {
+    background-color: var(--button-color);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
 
-        .search-container i {
-            position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-color);
-            opacity: 0.7;
-            font-size: 14px;
-        }
+#filterMenuButton:hover {
+    background-color: var(--button-active-color);
+}
 
-        .filter-dropdown {
-            background: var(--filter-bg);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 10px;
-            border-radius: 10px;
-            display: none;
-            position: absolute;
-            top: 60px;
-            right: 20px;
-            z-index: 100;
-            color: var(--text-color);
-        }
+.filter-dropdown {
+    background: var(--filter-bg);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 10px;
+    border-radius: 8px;
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    z-index: 100;
+}
 
-        #filterMenuButton {
-            background-color: var(--button-color);
-            color: white;
-            padding: 10px 25px 10px 25px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 500;
-            letter-spacing: 0.3px;
-            position: relative;
-        }
+#filterChips {
+    margin: 10px 0;
+}
 
-        #filterMenuButton:hover {
-            background-color: var(--button-active-color);
-        }
+#filterChips button {
+    background-color: var(--button-color);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 5px 15px;
+    margin: 5px;
+    cursor: pointer;
+}
 
-        .filter-counter {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background-color: #ffffff;
-            color: black;
-            border-radius: 20%;
-            padding: 4px 4px;
-            font-size: 12px;
-            font-weight: bold;
-            min-width: 20px;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            animation: pulse 1.5s infinite;
-            display: none;
-        }
+#filterChips button.active {
+    background-color: var(--button-active-color);
+}
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        
-        #filterChips {
-            margin-left: 25px;
-            margin-bottom: 10px;
-        }
-        
-        #filterChips button {
-            background-color: var(--button-color);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            padding: 5px 15px;
-            font-size: 14px;
-            margin: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-bottom: 10px;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 500;
-        }
+.cert-item {
+    padding: 20px;
+    border-radius: 12px;
+    background: var(--card-bg);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s;
+}
 
-        #filterChips button.active {
-            background-color: var(--button-active-color);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            font-size:15px;
-        }
+.cert-item:hover {
+    transform: scale(1.03);
+}
 
-        #filterChips button:hover {
-            background-color: var(--button-active-color);
-        }
+.cert-item h3 {
+    margin: 0;
+    font-size: 18px;
+    color: var(--text-color);
+}
 
-        .cert-item {
-            padding: 20px;
-            border-radius: 12px;
-            background: var(--card-bg);
-            backdrop-filter: blur(15px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            
-            transition: transform 0.3s, box-shadow 0.3s;
-            display: flex;
-            height: auto;
-            overflow: hidden;
-            flex-direction: column;
-            animation: cardEntrance 0.75s ease-out;
-        }
-        
-        #certList {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
-            gap: 20px;
-            width: 100%;
-            padding: 0 20px;
-            box-sizing: border-box;
-            max-width: 1200px; /* Maksimum 3 kolom (330px * 3 + gap) */
-        }
-        
-        /* Untuk desktop lebar */
-        @media (min-width: 1024px) {
-            #certList {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-        
-        /* Untuk tablet */
-        @media (max-width: 1023px) and (min-width: 769px) {
-            #certList {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
+.vendor-theme {
+    font-size: 12px;
+    color: var(--text-color);
+    opacity: 0.8;
+}
 
+.cert-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin-top: 10px;
+}
 
-        .cert-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
+.cert-link {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: var(--button-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+}
 
-        .cert-item h3 {
-            margin: 0;
-            font-size: 20px;
-            color: var(--text-color);
-            line-height: 1.4;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            min-height: 25px;
-            font-weight: 500;
-        }
+.cert-link:hover {
+    background-color: var(--button-active-color);
+}
 
-        .cert-item .vendor-theme {
-            font-size: 12px;
-            color: var(--text-color);
-            margin-top: 5px;
-            display: flex;
-            justify-content: flex-start;
-            gap: 5px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            flex-wrap: wrap;
-            opacity: 0.8;
-        }
+#certList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+}
 
-        .cert-item .cert-info {
-            display: flex;
-            justify-content: space-between;
-            font-size: 14px;
-            margin-top: 10px;
-            color: var(--text-color);
-            gap: 15px;
-        }
+footer {
+    margin-top: auto;
+    padding: 20px;
+    text-align: center;
+    color: var(--footer-color);
+}
 
-        .cert-item .cert-info span {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .cert-item .cert-info .icon {
-            font-size: 0.9em;
-            opacity: 0.8;
-        }
-
-        .cert-item .cert-link {
-            margin-top: 10px;
-            padding: 10px;
-            background-color: var(--button-color);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            text-align: center;
-            cursor: pointer;
-            font-weight: 500;
-            font-size: 17px;
-            width: 100%;
-            transition: background-color 0.3s;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .cert-item .cert-link:hover {
-            background-color: var(--button-active-color);
-        }
-
-        .empty-state {
-            text-align: center;
-            color: var(--text-color);
-            margin-top: 40px;
-            padding: 20px;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 400px;
-            animation: cardEntrance 0.75s ease-out;
-        }
-
-        .empty-state i {
-            font-size: 3em;
-            margin-bottom: 15px;
-            opacity: 0.8;
-        }
-
-        .empty-state p {
-            margin: 10px 0;
-            font-size: 16px;
-        }
-        
-        @keyframes cardEntrance {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        footer {
-            margin-top: auto;
-            padding: 20px;
-            text-align: center;
-            color: var(--footer-color);
-            font-size: 14px;
-            width: 100%;
-        }
-
-        #themeToggle {
-            position: fixed;
-            bottom: 30px;
-            right: 15px;
-            border-radius: 50%;
-            background: var(--button-color);
-            color: white;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            z-index: 1000;
-            transition: all 0.3s;
-        }
-
-        #themeToggle i {
-            font-size: 1.5em;
-            transition: transform 0.3s;
-        }
-
-        #themeToggle:hover {
-            transform: scale(1.1);
-        }
-
-        #themeToggle:hover i {
-            transform: scale(1.2);
-        }
-
-        @media (max-width: 768px) {
-            .main-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-        }
-        
-        .search-container {
-            width: 300px;
-        }
-        
-        #searchInput {
-            width: 100%;
-        }
-
-        #donateButton {
-            position: fixed;
-            bottom: 30px;
-            right: 45px;
-            background: var(--button-color);
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-            z-index: 1000;
-            text-decoration: none;
-        }
-
-        #donateButton:hover {
-            background: var(--button-active-color);
-            transform: scale(1.1);
-        }
-
-        #donateButton:hover .tooltip {
-            visibility: visible;
-            opacity: 1;
-            transform: translate(-50%, -130%);
-        }
-
-        #donateButton i {
-            font-size: 1.5em;
-        }
-
-        .tooltip {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translate(-50%, -100%);
-            background: var(--button-color);
-            color: white;
-            padding: 6px 12px;
-            border-radius: 5px;
-            font-size: 12px;
-            font-family: 'Poppins', sans-serif;
-            visibility: hidden;
-            opacity: 0;
-            transition: all 0.2s ease;
-            white-space: nowrap;
-            pointer-events: none;
-        }
-
-        .tooltip::after {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -5px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: var(--button-color) transparent transparent transparent;
-        }
-
-        #themeToggle {
-            right: 45px;
-            bottom: 90px;
-        }
-
-        @media (max-width: 768px) {
-            #donateButton {
-                bottom: 30px;
-                left: 12px;
-            }
-            
-            #themeToggle {
-                bottom: 100px;
-                left: 12px;
-            }
-        }
-    </style>
+#themeToggle {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    border-radius: 50%;
+    background: var(--button-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+}
+</style>
 </head>
 <body>
 
 <div class="main-header">
-  <h1>
-    <span class="type-animation" id="animatedTitle"></span> Gratis
-  </h1>
-  <div class="header-controls">
-      <div class="search-container">
-          <input type="text" id="searchInput" placeholder="Cari sertifikasi..."
-          aria-label="Cari berdasarkan judul, vendor, atau tema sertifikasi"
-          role="searchbox"> 
-          <i class="fas fa-search"></i>
-      </div>
-      <button id="filterMenuButton"
-        aria-label="Buka menu filter sertifikasi" 
-        aria-expanded="false" 
-        aria-haspopup="true">
-          <i class="fas fa-filter"></i> 
-          <span id="filterCounter" class="filter-counter">0</span>
-      </button>
-  </div>
+    <h1>Sertifikasi Gratis</h1>
+    <div class="header-controls">
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Cari sertifikasi...">
+            <i class="fas fa-search"></i>
+        </div>
+        <button id="filterMenuButton"><i class="fas fa-filter"></i></button>
+    </div>
 </div>
 
-<button id="themeToggle">
-    <i class="fas fa-moon"></i>
-</button>
-
-<a href="https://saweria.co/seonh" target="_blank" id="donateButton">
-    <i class="fas fa-mug-hot"></i> 
-    <span class="tooltip"> Huge Me!</span>
-</a>
-
-<div id="filterDropdown" class="filter-dropdown" role="menu"
-    aria-labelledby="filterMenuButton">
-    <h3 role="heading" aria-level="2">Filter Tema:</h3>
+<div id="filterDropdown" class="filter-dropdown">
+    <h3>Filter Tema:</h3>
     <label><input type="checkbox" class="theme-filter" value="Networking"> Networking</label><br>
     <label><input type="checkbox" class="theme-filter" value="Cyber Security"> Cyber Security</label><br>
     <label><input type="checkbox" class="theme-filter" value="Data Science"> Data Science</label><br>
@@ -561,285 +234,98 @@
 <div id="filterChips"></div>
 <div id="certList"></div>
 
-<script>
-    // ANIMASI TYPING 
-    const titles = ["Sertifikasi   ", "Belajar    "];
-    let currentTitle = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    const element = document.getElementById('animatedTitle');
-    const typeSpeed = 100;
-    const deleteSpeed = 50;
-    const pauseBetween = 1500;
-
-    function type() {
-    const currentText = titles[currentTitle];
-    
-    if(!isDeleting) {
-        element.textContent = currentText.slice(0, ++charIndex);
-        
-        // Hitung lebar teks sebenarnya
-        const textWidth = element.scrollWidth;
-        element.style.maxWidth = textWidth + 'px'; // Gunakan max-width
-        
-        if(charIndex === currentText.length) {
-            isDeleting = true;
-            setTimeout(type, pauseBetween);
-            return;
-        }
-    } else {
-        element.textContent = currentText.slice(0, --charIndex);
-        
-        // Pertahankan max-width saat menghapus
-        const textWidth = element.scrollWidth;
-        element.style.maxWidth = textWidth + 'px';
-        
-        if(charIndex === 0) {
-            isDeleting = false;
-            currentTitle = (currentTitle + 1) % titles.length;
-        }
-    }
-
-    setTimeout(type, isDeleting ? deleteSpeed : typeSpeed);
-}
-
-    // KODE ASLI TANPA DIUBAH
-    const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = themeToggle.querySelector('i');
-    
-    function toggleTheme() {
-        document.body.classList.toggle('dark-theme');
-        const isDark = document.body.classList.contains('dark-theme');
-        themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        if(savedTheme === 'dark') {
-            document.body.classList.add('dark-theme');
-            themeIcon.className = 'fas fa-sun';
-        }
-        setTimeout(type, 1000); // Mulai animasi setelah theme setup
-    });
-    
-    themeToggle.addEventListener('click', toggleTheme);
-
-    const certifications = [
-        { 
-            id: 1, 
-            vendor: "Cisco", 
-            title: "Networking Essentials", 
-            duration: "20 Jam", 
-            level: "Pemula", 
-            theme: "Networking", 
-            link: "https://skillsforall.com/course/networking-essentials" 
-        },
-        { 
-            id: 2, 
-            vendor: "Cisco", 
-            title: "Cybersecurity Essentials", 
-            duration: "15 Jam", 
-            level: "Menengah", 
-            theme: "Cyber Security", 
-            link: "https://skillsforall.com/course/cybersecurity-essentials" 
-        },
-        { 
-            id: 3, 
-            vendor: "IBM", 
-            title: "Data Science Fundamentals", 
-            duration: "12 Jam", 
-            level: "Pemula", 
-            theme: "Data Science", 
-            link: "https://cognitiveclass.ai/courses/data-science-101" 
-        },
-        { 
-            id: 4, 
-            vendor: "IBM", 
-            title: "AI Foundations for Everyone", 
-            duration: "10 Jam", 
-            level: "Pemula", 
-            theme: "Artificial Intelligence", 
-            link: "https://cognitiveclass.ai/courses/ai-foundations-for-everyone" 
-        },
-        { 
-            id: 5, 
-            vendor: "Kaggle", 
-            title: "Intro to Machine Learning", 
-            duration: "8 Jam", 
-            level: "Pemula", 
-            theme: "Machine Learning", 
-            link: "https://www.kaggle.com/learn/intro-to-machine-learning" 
-        },
-        { 
-            id: 6, 
-            vendor: "Kaggle", 
-            title: "Python for Data Science", 
-            duration: "6 Jam", 
-            level: "Pemula", 
-            theme: "Data Science", 
-            link: "https://www.kaggle.com/learn/python" 
-        },
-        { 
-            id: 7, 
-            vendor: "FutureLearn", 
-            title: "Digital Skills: Artificial Intelligence", 
-            duration: "10 Jam", 
-            level: "Pemula", 
-            theme: "Artificial Intelligence", 
-            link: "https://www.futurelearn.com/courses/artificial-intelligence" 
-        },
-        { 
-            id: 8, 
-            vendor: "FutureLearn", 
-            title: "Understanding Cybersecurity", 
-            duration: "12 Jam", 
-            level: "Menengah", 
-            theme: "Cyber Security", 
-            link: "https://www.futurelearn.com/courses/cybersecurity" 
-        },
-        { 
-            id: 9, 
-            vendor: "Code Signal", 
-            title: "JavaScript Coding Assessment", 
-            duration: "5 Jam", 
-            level: "Menengah", 
-            theme: "Programming", 
-            link: "https://codesignal.com/learn" 
-        },
-        { 
-            id: 10, 
-            vendor: "Code Signal", 
-            title: "SQL Database Certification", 
-            duration: "6 Jam", 
-            level: "Pemula", 
-            theme: "Database", 
-            link: "https://codesignal.com/learn-sql" 
-        }
-    ];
-
-    let state = {
-        vendors: [],
-        themes: [],
-        searchQuery: ''
-    };
-
-    let searchTimeout;
-    document.getElementById('searchInput').addEventListener('input', function(e) {
-        clearTimeout(searchTimeout);
-        searchTimeout = setTimeout(() => {
-            state.searchQuery = e.target.value.toLowerCase();
-            renderCertList();
-        }, 300);
-    });
-
-    function updateFilterCounter() {
-        const activeFilters = [...state.vendors, ...state.themes];
-        const counter = document.getElementById('filterCounter');
-        counter.textContent = activeFilters.length;
-        counter.style.display = activeFilters.length > 0 ? 'block' : 'none';
-    }
-
-    document.getElementById('filterMenuButton').addEventListener('click', () => {
-        const dropdown = document.getElementById('filterDropdown');
-        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-    });
-
-    document.querySelectorAll('.theme-filter').forEach(checkbox => {
-        checkbox.addEventListener('change', () => {
-            state.themes = Array.from(document.querySelectorAll('.theme-filter:checked'))
-                .map(cb => cb.value);
-            renderCertList();
-            updateFilterCounter();
-        });
-    });
-
-    function renderFilterChips() {
-        const vendors = [...new Set(certifications.map(cert => cert.vendor))];
-        const chipsHTML = vendors.map(vendor => `
-            <button 
-                onclick="toggleFilter('vendors', '${vendor}')" 
-                class="${state.vendors.includes(vendor) ? 'active' : ''}"
-            >
-                ${vendor}
-            </button>
-        `).join('');
-        document.getElementById('filterChips').innerHTML = chipsHTML;
-        updateFilterCounter();
-    }
-
-    function renderCertList() {
-        const filteredCerts = certifications.filter(cert => {
-            const vendorMatch = state.vendors.length === 0 || state.vendors.includes(cert.vendor);
-            const themeMatch = state.themes.length === 0 || state.themes.includes(cert.theme);
-            const searchMatch = cert.title.toLowerCase().includes(state.searchQuery) || 
-                              cert.vendor.toLowerCase().includes(state.searchQuery) || 
-                              cert.theme.toLowerCase().includes(state.searchQuery);
-            return vendorMatch && themeMatch && searchMatch;
-        });
-
-        const certList = document.getElementById('certList');
-        
-        if(filteredCerts.length === 0) {
-            certList.innerHTML = `
-                <div class="empty-state">
-                    <i class="fas fa-search-minus"></i>
-                    <h3>Oops, tidak ada sertifikasi yang ditemukan</h3>
-                </div>
-            `;
-        } else {
-            const listHTML = filteredCerts.map(cert => `
-                <div class="cert-item">
-                    <h3>${cert.title}</h3>
-                    <div class="vendor-theme">
-                        <span>${cert.vendor}</span>
-                        <span> - </span>
-                        <span>${cert.theme}</span>
-                    </div>
-                    <div class="cert-info">
-                        <span><i class="fas fa-clock icon"></i>${cert.duration}</span>
-                        <span><i class="fas fa-star icon"></i>${cert.level}</span>
-                    </div>
-                    <button class="cert-link" onclick="window.location.href='${cert.link}'">Akses</button>
-                </div>
-            `).join('');
-
-            certList.innerHTML = listHTML;
-            
-            const items = certList.querySelectorAll('.cert-item');
-            items.forEach(item => {
-                void item.offsetWidth;
-                item.style.animation = 'none';
-                item.style.animation = 'cardEntrance 0.75s ease-out';
-            });
-        }
-        
-        updateFilterCounter();
-    }
-
-    window.toggleFilter = (type, value) => {
-        state[type] = state[type].includes(value)
-            ? state[type].filter(v => v !== value)
-            : [...state[type], value];
-
-        renderFilterChips();
-        renderCertList();
-    };
-
-    window.addEventListener('click', (e) => {
-        if (!document.getElementById('filterMenuButton').contains(e.target) && 
-            !document.getElementById('filterDropdown').contains(e.target)) {
-            document.getElementById('filterDropdown').style.display = 'none';
-        }
-    });
-
-    renderFilterChips();
-    renderCertList();
-</script>
+<button id="themeToggle"><i class="fas fa-moon"></i></button>
 
 <footer>
-    Made with care by seonh_0 
+    Made with ❤️ by seonh_0
 </footer>
 
+<script>
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = themeToggle.querySelector('i');
+themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-theme');
+    const isDark = document.body.classList.contains('dark-theme');
+    themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    if(savedTheme === 'dark') {
+        document.body.classList.add('dark-theme');
+        themeIcon.className = 'fas fa-sun';
+    }
+});
+
+let certifications = [];
+let state = { vendors: [], themes: [], searchQuery: '' };
+
+document.getElementById('searchInput').addEventListener('input', e => {
+    state.searchQuery = e.target.value.toLowerCase();
+    renderCertList();
+});
+
+document.getElementById('filterMenuButton').addEventListener('click', () => {
+    const dropdown = document.getElementById('filterDropdown');
+    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+});
+
+document.querySelectorAll('.theme-filter').forEach(cb => {
+    cb.addEventListener('change', () => {
+        state.themes = Array.from(document.querySelectorAll('.theme-filter:checked')).map(c => c.value);
+        renderCertList();
+    });
+});
+
+function renderFilterChips() {
+    const vendors = [...new Set(certifications.map(cert => cert.vendor))];
+    document.getElementById('filterChips').innerHTML = vendors.map(v => `
+        <button onclick="toggleFilter('vendors','${v}')" class="${state.vendors.includes(v) ? 'active' : ''}">${v}</button>
+    `).join('');
+}
+
+function renderCertList() {
+    const filtered = certifications.filter(cert => {
+        const vendorMatch = state.vendors.length === 0 || state.vendors.includes(cert.vendor);
+        const themeMatch = state.themes.length === 0 || state.themes.includes(cert.theme);
+        const searchMatch = cert.title.toLowerCase().includes(state.searchQuery) ||
+                            cert.vendor.toLowerCase().includes(state.searchQuery) ||
+                            cert.theme.toLowerCase().includes(state.searchQuery);
+        return vendorMatch && themeMatch && searchMatch;
+    });
+
+    document.getElementById('certList').innerHTML = filtered.length === 0
+        ? `<div class="empty-state"><h3>Tidak ada sertifikasi ditemukan</h3></div>`
+        : filtered.map(cert => `
+            <div class="cert-item">
+                <h3>${cert.title}</h3>
+                <div class="vendor-theme">${cert.vendor} - ${cert.theme}</div>
+                <div class="cert-info">
+                    <span><i class="fas fa-clock"></i> ${cert.duration}</span>
+                    <span><i class="fas fa-star"></i> ${cert.level}</span>
+                </div>
+                <button class="cert-link" onclick="window.open('${cert.link}','_blank')">Akses</button>
+            </div>
+        `).join('');
+}
+
+function toggleFilter(type, value) {
+    state[type] = state[type].includes(value)
+        ? state[type].filter(v => v !== value)
+        : [...state[type], value];
+    renderFilterChips();
+    renderCertList();
+}
+
+fetch('certifications.json')
+    .then(res => res.json())
+    .then(data => {
+        certifications = data.certifications;
+        renderFilterChips();
+        renderCertList();
+    })
+    .catch(err => console.error('Gagal memuat data:', err));
+</script>
 </body>
 </html>
