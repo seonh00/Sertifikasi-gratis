@@ -45,8 +45,8 @@
       overflow: hidden;
       display: inline-block;
       color: var(--text-light); 
-      border-right: .10em solid transparent;
-      animation: typing-loop 6s steps(9, end) infinite, blink-caret .75s step-end infinite;
+      /* --- PERUBAIKAN: Animasi blink-caret dan border-right dihapus --- */
+      animation: typing-loop 6s steps(19, end) infinite;
     }
     body.dark .title-bar {
       color: var(--text-dark); 
@@ -58,12 +58,9 @@
       80%  { width: 100%; }
       100% { width: 0; }
     }
-    @keyframes blink-caret {
-      from, to { border-color: transparent }
-      50% { border-color: currentColor; } 
-    }
 
-    /* --- TAMBAHAN: CSS untuk animasi loading spinner --- */
+    /* --- PERUBAIKAN: Keyframes blink-caret dihapus karena tidak digunakan lagi --- */
+
     .loader {
       border: 6px solid var(--border-light);
       border-top-color: var(--pagination-active);
@@ -71,7 +68,7 @@
       width: 50px;
       height: 50px;
       animation: spin 1s linear infinite;
-      margin: 60px auto; /* Memberi jarak dari atas dan tengah */
+      margin: 60px auto;
     }
     body.dark .loader {
       border-color: var(--border-dark);
@@ -80,7 +77,6 @@
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
-    /* ------------------------------------------------ */
 
     .search-bar {
       display: flex;
@@ -300,7 +296,6 @@
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
     const titleBar = document.querySelector('.title-bar');
-    // --- TAMBAHAN: Mendapatkan elemen loading indicator ---
     const loadingIndicator = document.getElementById('loadingIndicator');
 
     let data = [];
@@ -309,9 +304,8 @@
     let currentVendor = "All";
 
     async function loadData() {
-      // --- TAMBAHAN: Logika untuk menampilkan dan menyembunyikan loader ---
-      loadingIndicator.style.display = 'block'; // Tampilkan loader
-      container.style.display = 'none'; // Sembunyikan container kartu
+      loadingIndicator.style.display = 'block';
+      container.style.display = 'none';
 
       try {
         const res = await fetch("./certifications.json");
@@ -324,8 +318,8 @@
         console.error("Gagal fetch JSON, fallback ke data default", e);
         container.innerHTML = `<p style="text-align:center;">Gagal memuat sertifikasi. Silakan coba lagi nanti.</p>`;
       } finally {
-        loadingIndicator.style.display = 'none'; // Selalu sembunyikan loader setelah selesai
-        container.style.display = 'grid'; // Tampilkan kembali container kartu
+        loadingIndicator.style.display = 'none';
+        container.style.display = 'grid';
       }
     }
 
@@ -338,12 +332,10 @@
     function filterVendor(vendor) {
       currentVendor = vendor;
       currentPage = 1;
-      // --- TAMBAHAN: Panggil loadData lagi agar loader muncul saat filter ---
       loadData();
     }
 
     function renderCards() {
-      // Sembunyikan loader dan tampilkan kartu di sini, karena renderCards dipanggil setelah data ada.
       loadingIndicator.style.display = 'none';
       container.style.display = 'grid';
 
