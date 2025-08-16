@@ -1,374 +1,435 @@
 <!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sertifikasi Gratis</title>
-  <style>
-    /* --- REFACTOR: Variabel Warna untuk Kontras Lebih Baik --- */
-    :root {
-      --bg-light: #f3f4f6;
-      --bg-dark: #121212;
-      --card-light: #ffffff;
-      --card-dark: #1e1e1e;
-      --text-light: #111827;
-      --text-dark: #e5e7eb;
-      --subtext-light: #6b7280;
-      --subtext-dark: #9ca3af;
-      --btn-bg: #007bff;
-      --btn-text: #ffffff;
-      --border-light: #e5e7eb;
-      --border-dark: #374151;
-    }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: var(--bg-light);
-      color: var(--text-light);
-      margin: 0;
-      padding: 0;
-      transition: background 0.3s, color 0.3s;
-    }
-    body.dark {
-      background: var(--bg-dark);
-      color: var(--text-dark);
-    }
-    header {
-      padding: 20px;
-      text-align: center;
-    }
-    /* --- REFACTOR: Menghapus animasi ketik & merapikan search bar --- */
-    .title-bar {
-      font-size: 1.8rem;
-      font-weight: bold;
-      margin-bottom: 20px;
-    }
-    .search-bar {
-      display: flex;
-      max-width: 400px;
-      margin: 0 auto;
-      align-items: center;
-      background: var(--card-light);
-      border: 1px solid var(--border-light);
-      border-radius: 25px;
-      padding: 5px 15px;
-    }
-    body.dark .search-bar {
-      background: var(--card-dark);
-      border-color: var(--border-dark);
-    }
-    .search-bar input {
-      border: none;
-      outline: none;
-      padding: 8px;
-      background: transparent;
-      color: inherit;
-      flex: 1;
-      font-size: 1rem;
-    }
-    .vendor-filters {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin: 20px 0;
-    }
-    .vendor-filters button {
-      padding: 8px 16px;
-      border: 1px solid var(--border-light);
-      color: var(--subtext-light);
-      border-radius: 20px;
-      cursor: pointer;
-      background: var(--card-light);
-      transition: all 0.2s;
-    }
-    body.dark .vendor-filters button {
-      background: var(--card-dark);
-      border-color: var(--border-dark);
-      color: var(--subtext-dark);
-    }
-    .vendor-filters button:hover, .vendor-filters button.active {
-      background: var(--btn-bg);
-      color: var(--btn-text);
-      border-color: var(--btn-bg);
-    }
-    .cards {
-      display: grid;
-      /* --- REFACTOR: Mengubah minmax untuk layout 2 kolom di mobile --- */
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-      padding: 0 20px 20px 20px;
-    }
-    /* --- REFACTOR: Menggunakan Flexbox untuk tata letak konten kartu --- */
-    .card {
-      background: var(--card-light);
-      border-radius: 15px;
-      padding: 20px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    body.dark .card {
-      background: var(--card-dark);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    }
-    .card-content {
-        flex-grow: 1;
-    }
-    .card h3 {
-      margin: 0 0 8px;
-      font-size: 1.2rem;
-    }
-    .meta {
-      font-size: 0.9rem;
-      color: var(--subtext-light);
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    body.dark .meta {
-      color: var(--subtext-dark);
-    }
-    .meta svg {
-      width: 16px;
-      height: 16px;
-      fill: currentColor;
-    }
-    .card-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 20px; /* Memberi jarak dari konten di atasnya */
-    }
-    .level {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.9rem;
-      color: var(--subtext-light);
-    }
-     body.dark .level {
-      color: var(--subtext-dark);
-    }
-    .level .star {
-      width: 18px;
-      height: 18px;
-    }
-    .level .star.pemula { color: gray; }
-    .level .star.menengah { color: gold; }
-    .level .star.expert { color: gold; }
-    .akses-btn {
-      padding: 8px 16px;
-      border-radius: 8px;
-      background: var(--btn-bg);
-      color: var(--btn-text);
-      text-decoration: none;
-      font-weight: 500;
-      transition: background 0.3s;
-      font-size: 0.9rem;
-    }
-    .akses-btn:hover { background: #0056b3; }
-    footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9rem;
-      color: var(--subtext-light)
-    }
-    body.dark footer {
-        color: var(--subtext-dark);
-    }
-    .pagination {
-      text-align: center;
-      margin: 20px;
-    }
-    .pagination button {
-      padding: 8px 14px;
-      margin: 0 5px;
-      border: 1px solid var(--border-light);
-      border-radius: 8px;
-      cursor: pointer;
-      background: var(--card-light);
-      color: var(--text-light);
-    }
-    body.dark .pagination button {
-      background: var(--card-dark);
-      border-color: var(--border-dark);
-      color: var(--text-dark);
-    }
-    .pagination button:disabled {
-      cursor: not-allowed;
-      opacity: 0.5;
-    }
-    .theme-toggle {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      cursor: pointer;
-      font-size: 24px;
-      background: var(--card-light);
-      border-radius: 50%;
-      width: 45px;
-      height: 45px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    body.dark .theme-toggle {
-        background: var(--card-dark);
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <div class="title-bar">Daftar Sertifikasi Gratis</div>
-    <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="Cari sertifikasi...">
-      <span>🔍</span>
-    </div>
-    <div class="vendor-filters" id="vendorFilters"></div>
-  </header>
+ <html lang="id">
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Sertifikasi Gratis</title>
+   <style>
+     /* --- REFACTOR: Variabel Warna untuk Kontras Lebih Baik --- */
+     :root {
+       --bg-light: #f3f4f6;
+       --bg-dark: #121212;
+       --card-light: #ffffff;
+       --card-dark: #1e1e1e;
+       --text-light: #111827;
+       --text-dark: #e5e7eb;
+       --subtext-light: #6b7280;
+       --subtext-dark: #9ca3af;
+       /* --- REFACTOR: Warna tombol akses diubah menjadi soft pink ungu --- */
+       --btn-bg: linear-gradient(to right, #ff6ec4, #ba55d3);
+       --btn-text: #ffffff;
+       --border-light: #e5e7eb;
+       --border-dark: #374151;
+       --pagination-active: #007bff;
+     }
+     body {
+       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+       background: var(--bg-light);
+       color: var(--text-light);
+       margin: 0;
+       padding: 0;
+       transition: background 0.3s, color 0.3s;
+     }
+     body.dark {
+       background: var(--bg-dark);
+       color: var(--text-dark);
+     }
+     header {
+       padding: 20px;
+       text-align: center;
+     }
+     /* --- REFACTOR: Animasi ketikan pada judul --- */
+     .title-bar {
+       font-size: 1.8rem;
+       font-weight: bold;
+       margin-bottom: 20px;
+       overflow: hidden; /* Hide the cursor initially */
+       white-space: nowrap;
+       margin: 0 auto 20px;
+       display: inline-block;
+     }
+     /* Typing animation */
+     @keyframes typing {
+       from { width: 0 }
+       to { width: 100% }
+     }
+     /* Blinking cursor animation */
+     @keyframes blink-caret {
+       from, to { border-color: transparent }
+       50% { border-color: var(--text-light); }
+     }
+     body.dark .title-bar {
+       color: var(--text-dark);
+       border-right: .05em solid var(--text-dark);
+       animation: typing 3s steps(20, end), blink-caret .75s step-end infinite;
+     }
+     .search-bar {
+       display: flex;
+       max-width: 400px;
+       margin: 0 auto;
+       align-items: center;
+       background: var(--card-light);
+       border: 1px solid var(--border-light);
+       border-radius: 25px;
+       padding: 5px 15px;
+     }
+     body.dark .search-bar {
+       background: var(--card-dark);
+       border-color: var(--border-dark);
+     }
+     .search-bar input {
+       border: none;
+       outline: none;
+       padding: 8px;
+       background: transparent;
+       color: inherit;
+       flex: 1;
+       font-size: 1rem;
+     }
+     .vendor-filters {
+       display: flex;
+       justify-content: center;
+       flex-wrap: wrap;
+       gap: 10px;
+       margin: 20px 0;
+     }
+     .vendor-filters button {
+       padding: 8px 16px;
+       border: 1px solid var(--border-light);
+       color: var(--subtext-light);
+       border-radius: 20px;
+       cursor: pointer;
+       background: var(--card-light);
+       transition: all 0.2s;
+     }
+     body.dark .vendor-filters button {
+       background: var(--card-dark);
+       border-color: var(--border-dark);
+       color: var(--subtext-dark);
+     }
+     .vendor-filters button:hover, .vendor-filters button.active {
+       background: var(--btn-bg);
+       color: var(--btn-text);
+       border-color: transparent;
+     }
+     .cards {
+       display: grid;
+       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+       gap: 20px;
+       padding: 0 20px 20px 20px;
+     }
+     /* --- REFACTOR: Animasi fade-in --- */
+     .card {
+       background: var(--card-light);
+       border-radius: 15px;
+       padding: 20px;
+       box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+       display: flex;
+       flex-direction: column;
+       justify-content: space-between;
+       transition: transform 0.2s, box-shadow 0.2s, opacity 0.5s;
+       opacity: 0; /* Initially hidden */
+     }
+     body.dark .card {
+       background: var(--card-dark);
+       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+     }
+     .card.show {
+       opacity: 1; /* Show with fade-in */
+     }
+     /* --- REFACTOR: Efek hover elegant --- */
+     .card:hover {
+       transform: translateY(-5px);
+       box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+     }
+     .card-content {
+         flex-grow: 1;
+     }
+     .card h3 {
+       margin: 0 0 8px;
+       font-size: 1.2rem;
+     }
+     .meta {
+       font-size: 0.9rem;
+       color: var(--subtext-light);
+       margin-bottom: 12px;
+       display: flex;
+       align-items: center;
+       gap: 8px;
+     }
+     body.dark .meta {
+       color: var(--subtext-dark);
+     }
+     .meta svg {
+       width: 16px;
+       height: 16px;
+       fill: currentColor;
+     }
+     .card-footer {
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
+       margin-top: 20px;
+     }
+     .level {
+       display: flex;
+       align-items: center;
+       gap: 8px;
+       font-size: 0.9rem;
+       color: var(--subtext-light);
+     }
+      body.dark .level {
+       color: var(--subtext-dark);
+     }
+     .level .star {
+       width: 18px;
+       height: 18px;
+     }
+     .level .star.pemula { color: gray; }
+     .level .star.menengah { color: gold; }
+     .level .star.expert { color: gold; }
+     .akses-btn {
+       padding: 8px 16px;
+       border-radius: 8px;
+       background: var(--btn-bg);
+       color: var(--btn-text);
+       text-decoration: none;
+       font-weight: 500;
+       transition: background 0.3s, transform 0.2s;
+       font-size: 0.9rem;
+     }
+     .akses-btn:hover {
+       background: linear-gradient(to right, #ff5eb8, #a54cd1);
+       transform: scale(1.05);
+     }
+     footer {
+       text-align: center;
+       padding: 20px;
+       font-size: 0.9rem;
+       color: var(--subtext-light)
+     }
+     body.dark footer {
+         color: var(--subtext-dark);
+     }
+     .pagination {
+       text-align: center;
+       margin: 20px;
+     }
+     .pagination button {
+       padding: 8px 12px;
+       margin: 0 5px;
+       border: 1px solid var(--border-light);
+       border-radius: 8px;
+       cursor: pointer;
+       background: var(--card-light);
+       color: var(--text-light);
+       transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+     }
+     body.dark .pagination button {
+       background: var(--card-dark);
+       border-color: var(--border-dark);
+       color: var(--text-dark);
+     }
+     .pagination button:hover:not(:disabled) {
+       background-color: var(--pagination-active);
+       color: var(--btn-text);
+       border-color: var(--pagination-active);
+     }
+     .pagination button:disabled {
+       cursor: not-allowed;
+       opacity: 0.5;
+     }
+     .pagination span {
+         margin: 0 10px;
+     }
+     .theme-toggle {
+       position: fixed;
+       bottom: 20px;
+       right: 20px;
+       cursor: pointer;
+       font-size: 24px;
+       background: var(--card-light);
+       border-radius: 50%;
+       width: 45px;
+       height: 45px;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+     }
+     body.dark .theme-toggle {
+         background: var(--card-dark);
+     }
+   </style>
+ </head>
+ <body>
+   <header>
+     <div class="title-bar">Sertifikasi Gratis</div>
+     <div class="search-bar">
+       <input type="text" id="searchInput" placeholder="Cari sertifikasi...">
+       <span>🔍</span>
+     </div>
+     <div class="vendor-filters" id="vendorFilters"></div>
+   </header>
 
-  <main>
-    <div class="cards" id="cardsContainer"></div>
-    <div class="pagination">
-      <button id="prevBtn">Sebelumnya</button>
-      <span id="pageInfo"></span>
-      <button id="nextBtn">Berikutnya</button>
-    </div>
-  </main>
+   <main>
+     <div class="cards" id="cardsContainer"></div>
+     <div class="pagination">
+       <button id="prevBtn">←</button>
+       <span id="pageInfo"></span>
+       <button id="nextBtn">→</button>
+     </div>
+   </main>
 
-  <footer>Made with care by seonh_0</footer>
-  <div class="theme-toggle" id="themeToggle">🌙</div>
+   <footer>Made with care by seonh_0</footer>
+   <div class="theme-toggle" id="themeToggle">🌙</div>
 
-  <script>
-    const container = document.getElementById("cardsContainer");
-    const searchInput = document.getElementById("searchInput");
-    const vendorFilters = document.getElementById("vendorFilters");
-    const themeToggle = document.getElementById("themeToggle");
+   <script>
+     const container = document.getElementById("cardsContainer");
+     const searchInput = document.getElementById("searchInput");
+     const vendorFilters = document.getElementById("vendorFilters");
+     const themeToggle = document.getElementById("themeToggle");
+     const pageInfoSpan = document.getElementById("pageInfo");
+     const prevBtn = document.getElementById("prevBtn");
+     const nextBtn = document.getElementById("nextBtn");
+     const titleBar = document.querySelector('.title-bar');
 
-    let data = [];
-    let currentPage = 1;
-    const perPage = 6;
-    let currentVendor = "All";
+     let data = [];
+     let currentPage = 1;
+     const perPage = 6;
+     let currentVendor = "All";
 
-    async function loadData() {
-      try {
-        const res = await fetch("./certifications.json");
-        if (!res.ok) throw new Error("Fetch gagal");
-        const json = await res.json();
-        data = json.certifications;
-      } catch (e) {
-        console.error("Gagal fetch JSON, fallback ke data default", e);
-        // Fallback data jika JSON gagal dimuat
-        data = [
-          { title: "Python for Data Science", vendor: "Kaggle", theme: "Data Science", level: "Pemula", duration: "8 Jam", link: "#" },
-          { title: "CS50's Intro to Computer Science", vendor: "Harvard", theme: "Computer Science", level: "Menengah", duration: "50 Jam", link: "#" },
-        ];
-      }
-      renderVendors();
-      renderCards();
-    }
+     async function loadData() {
+       try {
+         const res = await fetch("./certifications.json");
+         if (!res.ok) throw new Error("Fetch gagal");
+         const json = await res.json();
+         data = json.certifications;
+       } catch (e) {
+         console.error("Gagal fetch JSON, fallback ke data default", e);
+         data = [
+           { title: "Python for Data Science", vendor: "Kaggle", theme: "Data Science", level: "Pemula", duration: "8 Jam", link: "#" },
+           { title: "CS50's Intro to Computer Science", vendor: "Harvard", theme: "Computer Science", level: "Menengah", duration: "50 Jam", link: "#" },
+           { title: "Digital Marketing Fundamentals", vendor: "Google", theme: "Digital Marketing", level: "Pemula", duration: "15 Jam", link: "#" },
+           { title: "Introduction to Cybersecurity", vendor: "Cisco", theme: "Cyber Security", level: "Pemula", duration: "12 Jam", link: "#" },
+           { title: "AI for Healthcare", vendor: "Future Learn", theme: "Artificial Intelligence", level: "Menengah", duration: "18 Jam", link: "#" },
+           { title: "JavaScript Fundamentals", vendor: "Code Signal", theme: "Programming", level: "Pemula", duration: "6 Jam", link: "#" },
+           { title: "Data Analysis with Python", vendor: "IBM", theme: "Data Science", level: "Menengah", duration: "10 Jam", link: "#" },
+           { title: "Cloud Computing Basics", vendor: "Google", theme: "Cloud Computing", level: "Pemula", duration: "30 Jam", link: "#" },
+           { title: "Networking Basics", vendor: "Cisco", theme: "Networking", level: "Pemula", duration: "16 Jam", link: "#" }
+         ];
+       }
+       renderVendors();
+       renderCards();
+     }
 
-    function renderVendors() {
-      const vendors = ["All", ...new Set(data.map(c => c.vendor))];
-      vendorFilters.innerHTML = vendors.map(v =>
-        `<button class="${currentVendor === v ? 'active' : ''}" onclick="filterVendor('${v}')">${v}</button>`).join("");
-    }
+     function renderVendors() {
+       const vendors = ["All", ...new Set(data.map(c => c.vendor))];
+       vendorFilters.innerHTML = vendors.map(v =>
+         `<button class="${currentVendor === v ? 'active' : ''}" onclick="filterVendor('${v}')">${v}</button>`).join("");
+     }
 
-    function filterVendor(vendor) {
-      currentVendor = vendor;
-      currentPage = 1;
-      renderVendors(); // Render ulang untuk menyorot tombol aktif
-      renderCards();
-    }
+     function filterVendor(vendor) {
+       currentVendor = vendor;
+       currentPage = 1;
+       renderVendors();
+       renderCards();
+     }
 
-    function renderCards() {
-      const searchTerm = searchInput.value.toLowerCase();
-      let filtered = data.filter(c =>
-        (c.title.toLowerCase().includes(searchTerm) ||
-         c.vendor.toLowerCase().includes(searchTerm) ||
-         c.theme.toLowerCase().includes(searchTerm)) &&
-        (currentVendor === "All" || c.vendor === currentVendor)
-      );
+     function renderCards() {
+       const searchTerm = searchInput.value.toLowerCase();
+       let filtered = data.filter(c =>
+         (c.title.toLowerCase().includes(searchTerm) ||
+          c.vendor.toLowerCase().includes(searchTerm) ||
+          c.theme.toLowerCase().includes(searchTerm)) &&
+         (currentVendor === "All" || c.vendor === currentVendor)
+       );
 
-      const totalPages = Math.ceil(filtered.length / perPage) || 1;
-      if (currentPage > totalPages) currentPage = totalPages;
-      const start = (currentPage - 1) * perPage;
-      const paginated = filtered.slice(start, start + perPage);
+       const totalPages = Math.ceil(filtered.length / perPage) || 1;
+       if (currentPage > totalPages) currentPage = totalPages;
+       const start = (currentPage - 1) * perPage;
+       const paginated = filtered.slice(start, start + perPage);
 
-      // --- REFACTOR: Template Kartu diubah agar sesuai dengan layout gambar ---
-      container.innerHTML = paginated.map(c => `
-        <div class="card">
-          <div class="card-content">
-            <h3>${c.title}</h3>
-            <div class="meta">${c.vendor} · ${c.theme}</div>
-            <div class="meta">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M13 7h-2v5.414l3.293 3.293 1.414-1.414L13 11.586z"></path></svg>
-              <span>${c.duration}</span>
-            </div>
-          </div>
-          <div class="card-footer">
-            <div class="level">
-                ${renderStar(c.level)}
-                <span>${c.level}</span>
-            </div>
-            <a class="akses-btn" href="${c.link}" target="_blank" rel="noopener noreferrer">Akses</a>
-          </div>
-        </div>
-      `).join("");
+       container.innerHTML = paginated.map((c, index) => `
+         <div class="card" style="animation-delay: ${index * 0.1}s;">
+           <div class="card-content">
+             <h3>${c.title}</h3>
+             <div class="meta">${c.vendor} · ${c.theme}</div>
+             <div class="meta">
+               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M13 7h-2v5.414l3.293 3.293 1.414-1.414L13 11.586z"></path></svg>
+               <span>${c.duration}</span>
+             </div>
+           </div>
+           <div class="card-footer">
+             <div class="level">
+                 ${renderStar(c.level)}
+                 <span>${c.level}</span>
+             </div>
+             <a class="akses-btn" href="${c.link}" target="_blank" rel="noopener noreferrer">Akses</a>
+           </div>
+         </div>
+       `).join("");
 
-      document.getElementById("pageInfo").textContent = `Halaman ${currentPage} dari ${totalPages}`;
-      document.getElementById("prevBtn").disabled = currentPage === 1;
-      document.getElementById("nextBtn").disabled = currentPage === totalPages;
-    }
+       pageInfoSpan.textContent = `${currentPage} / ${totalPages}`;
+       prevBtn.disabled = currentPage === 1;
+       nextBtn.disabled = currentPage === totalPages;
 
-    // --- REFACTOR: Menggunakan SVG inline untuk ikon bintang ---
-    function renderStar(level) {
-        const levelClass = level.toLowerCase();
-        return `<svg class="star ${levelClass}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path></svg>`;
-    }
+       // Add 'show' class with a delay for fade-in effect
+       setTimeout(() => {
+         document.querySelectorAll('.card').forEach(card => card.classList.add('show'));
+       }, 50);
+     }
 
-    document.getElementById("prevBtn").onclick = () => {
-      if (currentPage > 1) { currentPage--; renderCards(); }
-    };
-    document.getElementById("nextBtn").onclick = () => {
-      const searchTerm = searchInput.value.toLowerCase();
-      let filtered = data.filter(c =>
-        (c.title.toLowerCase().includes(searchTerm) || c.vendor.toLowerCase().includes(searchTerm)) &&
-        (currentVendor === "All" || c.vendor === currentVendor)
-      );
-      if (currentPage < Math.ceil(filtered.length / perPage)) { currentPage++; renderCards(); }
-    };
-    searchInput.addEventListener("input", () => { currentPage = 1; renderCards(); });
+     function renderStar(level) {
+         const levelClass = level.toLowerCase();
+         return `<svg class="star ${levelClass}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path></svg>`;
+     }
 
-    // --- REFACTOR: Logika Dark Mode ---
-    function toggleTheme() {
-        const isDark = document.body.classList.toggle("dark");
-        themeToggle.textContent = isDark ? "☀️" : "🌙";
-        localStorage.setItem("theme", isDark ? "dark" : "light");
-    }
+     prevBtn.onclick = () => {
+       if (currentPage > 1) { currentPage--; renderCards(); }
+     };
+     nextBtn.onclick = () => {
+       const searchTerm = searchInput.value.toLowerCase();
+       let filtered = data.filter(c =>
+         (c.title.toLowerCase().includes(searchTerm) || c.vendor.toLowerCase().includes(searchTerm)) &&
+         (currentVendor === "All" || c.vendor === currentVendor)
+       );
+       if (currentPage < Math.ceil(filtered.length / perPage)) { currentPage++; renderCards(); }
+     };
+     searchInput.addEventListener("input", () => { currentPage = 1; renderCards(); });
 
-    themeToggle.addEventListener("click", toggleTheme);
+     function toggleTheme() {
+         const isDark = document.body.classList.toggle("dark");
+         themeToggle.textContent = isDark ? "☀️" : "🌙";
+         localStorage.setItem("theme", isDark ? "dark" : "light");
+         // Restart typing animation on theme change for dark mode
+         if (isDark) {
+             titleBar.style.borderRight = '.05em solid var(--text-dark)';
+             titleBar.style.animation = 'typing 3s steps(20, end), blink-caret .75s step-end infinite';
+         } else {
+             titleBar.style.borderRight = '.05em solid var(--text-light)';
+             titleBar.style.animation = 'typing 3s steps(20, end), blink-caret .75s step-end infinite';
+         }
+     }
 
-    // Memeriksa tema yang tersimpan saat memuat halaman
-    (function () {
-        const savedTheme = localStorage.getItem("theme");
-        if (savedTheme === "dark") {
-            document.body.classList.add("dark");
-            themeToggle.textContent = "☀️";
-        } else {
-            themeToggle.textContent = "🌙";
-        }
-    })();
+     themeToggle.addEventListener("click", toggleTheme);
 
-    loadData();
-  </script>
-</body>
-</html>
+     (function () {
+         const savedTheme = localStorage.getItem("theme");
+         if (savedTheme === "dark") {
+             document.body.classList.add("dark");
+             themeToggle.textContent = "☀️";
+             titleBar.style.color = 'var(--text-dark)';
+             titleBar.style.borderRight = '.05em solid var(--text-dark)';
+             titleBar.style.animation = 'typing 3s steps(20, end), blink-caret .75s step-end infinite';
+         } else {
+             titleBar.style.color = 'var(--text-light)';
+             titleBar.style.borderRight = '.05em solid var(--text-light)';
+             titleBar.style.animation = 'typing 3s steps(20, end), blink-caret .75s step-end infinite';
+         }
+     })();
+
+     loadData();
+   </script>
+ </body>
+ </html>
