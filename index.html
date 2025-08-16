@@ -46,24 +46,41 @@
       display: inline-block;
       color: var(--text-light); 
       border-right: .10em solid transparent;
-      /* --- PERUBAHAN: Menggunakan animasi baru 'typing-loop' --- */
       animation: typing-loop 6s steps(25, end) infinite, blink-caret .75s step-end infinite;
     }
     body.dark .title-bar {
       color: var(--text-dark); 
     }
     
-    /* --- PERUBAHAN: Keyframes baru untuk animasi ketik berulang --- */
     @keyframes typing-loop {
       0%   { width: 0; }
-      50%  { width: 100%; } /* Mengetik hingga selesai */
-      80%  { width: 100%; } /* Berhenti sejenak */
-      100% { width: 0; }    /* Menghapus tulisan */
+      50%  { width: 100%; }
+      80%  { width: 100%; }
+      100% { width: 0; }
     }
     @keyframes blink-caret {
       from, to { border-color: transparent }
       50% { border-color: currentColor; } 
     }
+
+    /* --- TAMBAHAN: CSS untuk animasi loading spinner --- */
+    .loader {
+      border: 6px solid var(--border-light);
+      border-top-color: var(--pagination-active);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      margin: 60px auto; /* Memberi jarak dari atas dan tengah */
+    }
+    body.dark .loader {
+      border-color: var(--border-dark);
+      border-top-color: var(--pagination-active);
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    /* ------------------------------------------------ */
 
     .search-bar {
       display: flex;
@@ -262,6 +279,7 @@
   </header>
 
   <main>
+    <div id="loadingIndicator" class="loader"></div>
     <div class="cards" id="cardsContainer"></div>
     <div class="pagination">
       <button id="prevBtn">←</button>
@@ -274,7 +292,6 @@
   <div class="theme-toggle" id="themeToggle">🌙</div>
 
   <script>
-    // JavaScript tidak perlu diubah untuk animasi berulang
     const container = document.getElementById("cardsContainer");
     const searchInput = document.getElementById("searchInput");
     const vendorFilters = document.getElementById("vendorFilters");
@@ -283,6 +300,8 @@
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
     const titleBar = document.querySelector('.title-bar');
+    // --- TAMBAHAN: Mendapatkan elemen loading indicator ---
+    const loadingIndicator = document.getElementById('loadingIndicator');
 
     let data = [];
     let currentPage = 1;
@@ -290,20 +309,24 @@
     let currentVendor = "All";
 
     async function loadData() {
+      // --- TAMBAHAN: Logika untuk menampilkan dan menyembunyikan loader ---
+      loadingIndicator.style.display = 'block'; // Tampilkan loader
+      container.style.display = 'none'; // Sembunyikan container kartu
+
       try {
         const res = await fetch("./certifications.json");
         if (!res.ok) throw new Error("Fetch gagal");
         const json = await res.json();
         data = json.certifications;
+        renderVendors();
+        renderCards();
       } catch (e) {
         console.error("Gagal fetch JSON, fallback ke data default", e);
-        data = [
-          { title: "Python for Data Science", vendor: "Kaggle", theme: "Data Science", level: "Pemula", duration: "8 Jam", link: "#" },
-          { title: "CS50's Intro to Computer Science", vendor: "Harvard", theme: "Computer Science", level: "Menengah", duration: "50 Jam", link: "#" },
-        ];
+        container.innerHTML = `<p style="text-align:center;">Gagal memuat sertifikasi. Silakan coba lagi nanti.</p>`;
+      } finally {
+        loadingIndicator.style.display = 'none'; // Selalu sembunyikan loader setelah selesai
+        container.style.display = 'grid'; // Tampilkan kembali container kartu
       }
-      renderVendors();
-      renderCards();
     }
 
     function renderVendors() {
@@ -315,11 +338,15 @@
     function filterVendor(vendor) {
       currentVendor = vendor;
       currentPage = 1;
-      renderVendors();
-      renderCards();
+      // --- TAMBAHAN: Panggil loadData lagi agar loader muncul saat filter ---
+      loadData();
     }
 
     function renderCards() {
+      // Sembunyikan loader dan tampilkan kartu di sini, karena renderCards dipanggil setelah data ada.
+      loadingIndicator.style.display = 'none';
+      container.style.display = 'grid';
+
       const searchTerm = searchInput.value.toLowerCase();
       let filtered = data.filter(c =>
         (c.title.toLowerCase().includes(searchTerm) ||
@@ -371,11 +398,7 @@
       if (currentPage > 1) { currentPage--; renderCards(); }
     };
     nextBtn.onclick = () => {
-      const searchTerm = searchInput.value.toLowerCase();
-      let filtered = data.filter(c =>
-        (c.title.toLowerCase().includes(searchTerm) || c.vendor.toLowerCase().includes(searchTerm)) &&
-        (currentVendor === "All" || c.vendor === currentVendor)
-      );
+      let filtered = data.filter(c => (currentVendor === "All" || c.vendor === currentVendor));
       if (currentPage < Math.ceil(filtered.length / perPage)) { currentPage++; renderCards(); }
     };
     searchInput.addEventListener("input", () => { currentPage = 1; renderCards(); });
