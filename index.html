@@ -37,7 +37,6 @@
       text-align: center;
     }
     
-    /* --- PERBAIKAN: Animasi ketikan dibuat universal untuk kedua tema --- */
     .title-bar {
       font-size: 1.8rem;
       font-weight: bold;
@@ -45,20 +44,25 @@
       white-space: nowrap;
       overflow: hidden;
       display: inline-block;
-      color: var(--text-light); /* PERBAIKAN: Kontras pada light mode */
-      border-right: .10em solid transparent; /* Sembunyikan border awal */
-      animation: typing 3s steps(25, end), blink-caret .75s step-end infinite;
+      color: var(--text-light); 
+      border-right: .10em solid transparent;
+      /* --- PERUBAHAN: Menggunakan animasi baru 'typing-loop' --- */
+      animation: typing-loop 6s steps(25, end) infinite, blink-caret .75s step-end infinite;
     }
     body.dark .title-bar {
-      color: var(--text-dark); /* Warna teks untuk dark mode */
+      color: var(--text-dark); 
     }
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
+    
+    /* --- PERUBAHAN: Keyframes baru untuk animasi ketik berulang --- */
+    @keyframes typing-loop {
+      0%   { width: 0; }
+      50%  { width: 100%; } /* Mengetik hingga selesai */
+      80%  { width: 100%; } /* Berhenti sejenak */
+      100% { width: 0; }    /* Menghapus tulisan */
     }
     @keyframes blink-caret {
       from, to { border-color: transparent }
-      50% { border-color: currentColor; } /* Kursor mengambil warna teks saat ini */
+      50% { border-color: currentColor; } 
     }
 
     .search-bar {
@@ -114,7 +118,6 @@
       border-color: transparent;
       font-weight: bold;
     }
-    /* --- PERBAIKAN: Aturan spesifik untuk tombol aktif di dark mode --- */
     body.dark .vendor-filters button.active {
       background: var(--btn-bg);
       color: var(--btn-text);
@@ -127,8 +130,6 @@
       gap: 20px;
       padding: 0 20px 20px 20px;
     }
-
-    /* --- PERBAIKAN: Animasi kartu dibuat lebih jelas (slide-up + fade-in) --- */
     .card {
       background: var(--card-light);
       border-radius: 15px;
@@ -138,16 +139,16 @@
       flex-direction: column;
       justify-content: space-between;
       transition: transform 0.3s ease-out, box-shadow 0.3s, opacity 0.5s ease-out;
-      opacity: 0; /* Sembunyi di awal */
-      transform: translateY(20px); /* Posisi awal sedikit di bawah */
+      opacity: 0; 
+      transform: translateY(20px); 
     }
     body.dark .card {
       background: var(--card-dark);
       box-shadow: 0 4px 20px rgba(0,0,0,0.2);
     }
     .card.show {
-      opacity: 1; /* Muncul */
-      transform: translateY(0); /* Kembali ke posisi normal */
+      opacity: 1; 
+      transform: translateY(0); 
     }
     .card:hover {
       transform: translateY(-5px);
@@ -273,7 +274,7 @@
   <div class="theme-toggle" id="themeToggle">🌙</div>
 
   <script>
-    // --- Tidak ada perubahan signifikan pada JavaScript, semua perbaikan dilakukan di CSS ---
+    // JavaScript tidak perlu diubah untuk animasi berulang
     const container = document.getElementById("cardsContainer");
     const searchInput = document.getElementById("searchInput");
     const vendorFilters = document.getElementById("vendorFilters");
